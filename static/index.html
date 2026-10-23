@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="tl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Magic Editor</title>
+</head>
+<body style="font-family:Arial;background:#100d1d;color:white;padding:24px">
+<h1>AI Magic Editor</h1>
+<p>Mag-upload ng video o larawan at ilagay ang gustong editing command.</p>
+<form action="/api/edit" method="post" enctype="multipart/form-data">
+<input type="file" name="file" accept="video/*,image/*" required>
+<p><input name="command" placeholder="Hal. trim 5 to 20" required></p>
+<button type="submit">Edit media</button>
+</form>
+</body>
+</html>
