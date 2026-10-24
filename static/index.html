@@ -1,17 +1,78 @@
 <!doctype html>
-<html lang="tl">
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI Magic Editor</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b0a14">
+<title>AI MAGIC EDITOR</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0a14;--panel:#151424;--panel2:#1d1b31;--text:#f5f3ff;--muted:#a6a2bd;--purple:#8b5cf6;--blue:#38bdf8;--line:#302c49}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#211443 0%,var(--bg) 46%);color:var(--text);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+main{max-width:920px;margin:auto;padding:20px 15px 42px}.top{display:flex;align-items:center;gap:12px;margin:6px 0 22px}.logo{width:45px;height:45px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),var(--blue));font-size:24px;box-shadow:0 8px 28px #6d28d966}.brand{font-size:20px;font-weight:850;letter-spacing:.3px}.brand span{color:#bca5ff}.sub{color:var(--muted);font-size:12px}.pill{margin-left:auto;border:1px solid #5b4a89;background:#251a42;color:#d9c9ff;border-radius:99px;padding:7px 10px;font-size:11px}
+.hero{padding:22px 0 18px}.eyebrow{color:#bba8ff;text-transform:uppercase;font-size:11px;font-weight:800;letter-spacing:2px}.hero h1{font-size:clamp(30px,7vw,48px);line-height:1.06;margin:9px 0 12px;letter-spacing:-1.5px}.hero h1 em{font-style:normal;background:linear-gradient(90deg,#c4b5fd,#7dd3fc);color:transparent;background-clip:text}.hero p{color:var(--muted);max-width:580px;margin:0}
+.panel{background:linear-gradient(160deg,#1b1930ee,#11101dee);border:1px solid var(--line);border-radius:23px;padding:17px;margin:15px 0;box-shadow:0 14px 40px #0002}.section-title{font-weight:750;margin:0 0 12px;font-size:15px;display:flex;justify-content:space-between;align-items:center}.small{font-size:12px;color:var(--muted);font-weight:450}
+.upload{border:1.5px dashed #5b4b83;border-radius:18px;padding:24px 15px;text-align:center;background:#171429;cursor:pointer;display:block}.upload .symbol{font-size:30px}.upload strong{display:block;margin:7px 0 3px}.upload small{color:var(--muted)}input[type=file]{display:none}
+#previewWrap{display:none;margin-top:13px}video,img{max-width:100%;max-height:390px;border-radius:15px;background:#05050a;display:block;margin:auto}#fileMeta{font-size:12px;color:#c4b5fd;text-align:center;margin:9px 0 0}
+label{display:block;font-size:12px;color:#c7c2db;margin:0 0 8px}textarea{width:100%;min-height:95px;resize:vertical;border-radius:15px;border:1px solid #393452;background:#0e0d19;color:var(--text);padding:14px;font:inherit;outline:none}textarea:focus{border-color:var(--purple);box-shadow:0 0 0 3px #8b5cf622}.row{display:flex;gap:9px;align-items:center}.row>*{min-width:0}.mic,.secondary,.primary{border:0;border-radius:13px;padding:12px 14px;font:inherit;font-weight:750;cursor:pointer}.mic,.secondary{background:#292541;border:1px solid #454060;color:#e6e0ff}.mic{font-size:18px;padding:10px 14px}.primary{width:100%;margin-top:12px;padding:15px;background:linear-gradient(100deg,#8b5cf6,#4f8df7);color:white;box-shadow:0 7px 24px #6840cf44}.primary:disabled{opacity:.55;cursor:not-allowed}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.chip{border:1px solid #393452;background:#1b1930;color:#d5c9ff;padding:8px 10px;border-radius:99px;font-size:12px;cursor:pointer}.status{display:none;padding:12px;border-radius:12px;margin-top:12px;background:#201b36;color:#d8ceff;font-size:13px}.status.error{background:#3b1826;color:#fecdd3}.status.ok{background:#123327;color:#bbf7d0}.result{display:none}.result a{display:inline-block;text-decoration:none;color:white;background:#17664e;border-radius:12px;padding:12px 15px;font-weight:750;margin-top:12px}.features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.feature{padding:13px;border:1px solid var(--line);border-radius:15px;background:#171527}.feature b{display:block;font-size:13px}.feature span{font-size:11px;color:var(--muted)}.foot{text-align:center;color:#77728f;font-size:11px;padding:15px 0}.bar{height:5px;background:#302b48;border-radius:10px;overflow:hidden;display:none;margin-top:12px}.bar div{height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--blue));transition:width .3s}
+@media(min-width:680px){main{padding:28px 24px}.workspace{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}.features{grid-template-columns:repeat(4,1fr)}.hero{padding-top:30px}.panel{padding:20px}}
+</style>
 </head>
-<body style="font-family:Arial;background:#100d1d;color:white;padding:24px">
-<h1>AI Magic Editor</h1>
-<p>Mag-upload ng video o larawan at ilagay ang gustong editing command.</p>
-<form action="/api/edit" method="post" enctype="multipart/form-data">
-<input type="file" name="file" accept="video/*,image/*" required>
-<p><input name="command" placeholder="Hal. trim 5 to 20" required></p>
-<button type="submit">Edit media</button>
-</form>
-</body>
-</html>
+<body><main>
+<header class="top"><div class="logo">✦</div><div><div class="brand">AI MAGIC <span>EDITOR</span></div><div class="sub">Your words. Your edit. Your style.</div></div><div class="pill">MAX 02:00</div></header>
+<section class="hero"><div class="eyebrow">AI-powered creative studio</div><h1>Edit with words.<br><em>Not complicated tools.</em></h1><p>Mag-upload ng video o photo. I-type o sabihin ang gusto mong edit, at ipoproseso ng app ang mga supported effect.</p></section>
+<div class="workspace">
+<section class="panel"><div class="section-title">01 · Add your media <span class="small">Max video 120 sec</span></div>
+<label class="upload" for="file"><div class="symbol">＋</div><strong>Upload Video or Photo</strong><small>MP4, MOV, JPG, PNG, WEBP · up to 250 MB</small></label><input id="file" type="file" accept="video/mp4,video/quicktime,video/webm,image/jpeg,image/png,image/webp">
+<div style="margin-top:14px"><label for="musicFile">🎵 Optional music file (video only; replaces original audio)</label><input id="musicFile" type="file" accept="audio/mpeg,audio/wav,audio/mp4,audio/aac,audio/ogg" style="display:block;width:100%;font-size:12px;color:#c7c2db"></div>
+<div id="previewWrap"><video id="preview" controls playsinline style="display:none"></video><img id="imagePreview" style="display:none" alt="Selected photo preview"><div id="fileMeta"></div></div>
+</section>
+<section class="panel"><div class="section-title">02 · Describe your edit <span class="small">Filipino / English</span></div>
+<label for="command">ANO ANG GUSTO MONG GAWIN?</label><div class="row"><textarea id="command" placeholder="Halimbawa: Gawing cinematic, vertical para sa TikTok, at medyo dark ang kulay."></textarea><button class="mic" id="mic" aria-label="Voice command" title="Speak command">🎙️</button></div>
+<div class="chips"><button class="chip" data-cmd="cinematic">🎬 Cinematic</button><button class="chip" data-cmd="vertical">📱 Vertical</button><button class="chip" data-cmd="slow motion">🐢 Slow motion</button><button class="chip" data-cmd="black and white">◐ B&W</button><button class="chip" data-cmd="brighten">☀️ Brighten</button><button class="chip" data-cmd="sepia">🟤 Sepia</button><button class="chip" data-cmd="vintage">📼 Vintage</button><button class="chip" data-cmd="warm">🌅 Warm</button><button class="chip" data-cmd="cool">❄️ Cool</button><button class="chip" data-cmd="vivid">🌈 Vivid</button><button class="chip" data-cmd="fade transition">✨ Fade transition</button><button class="chip" data-cmd="trim 5 to 20">✂️ Trim 5–20 sec</button><button class="chip" data-cmd="text: YOUR TITLE HERE">🔤 Add text</button><button class="chip" data-cmd="removebg">🟩 Remove green background</button></div>
+<p class="small">Text example: <b>text: My Travel Vlog</b>. “Remove green background” works only for green-screen photos, not general AI background removal.</p>
+<button class="primary" id="editBtn">✦ Edit with AI</button><div class="bar" id="bar"><div id="barFill"></div></div><div class="status" id="status" role="status"></div>
+</section></div>
+<section class="panel result" id="result"><div class="section-title">03 · Your edited result</div><div id="resultPreview"></div><a id="download" download="ai-magic-edited.mp4" href="#">⬇ Download edited file</a><p class="small">Tip: Maaari kang mag-upload ulit at magbigay ng panibagong instruction para sa ibang version.</p></section>
+<section class="panel"><div class="section-title">Made for simple, fast edits</div><div class="features"><div class="feature"><b>✂️ Smart trimming</b><span>Trim using seconds</span></div><div class="feature"><b>🎨 Color filters</b><span>Sepia, vintage, warm, cool, vivid</span></div><div class="feature"><b>✨ Fade transitions</b><span>Fade-in and fade-out</span></div><div class="feature"><b>🔤 Text overlays</b><span>Add a title or caption</span></div><div class="feature"><b>🎵 Music</b><span>Upload a music track for video</span></div><div class="feature"><b>🟩 Green-screen key</b><span>Basic green background removal</span></div><div class="feature"><b>📐 Aspect ratio</b><span>Vertical, square, landscape</span></div><div class="feature"><b>🎙️ Voice commands</b><span>Browser-supported speech</span></div></div></section>
+<div class="foot">AI MAGIC EDITOR MVP · Video edits are processed on the configured server.</div>
+</main>
+<script>
+const fileInput=document.getElementById('file'), musicInput=document.getElementById('musicFile'), preview=document.getElementById('preview'), img=document.getElementById('imagePreview'), wrap=document.getElementById('previewWrap'), meta=document.getElementById('fileMeta'), cmd=document.getElementById('command'), btn=document.getElementById('editBtn'), statusBox=document.getElementById('status'), bar=document.getElementById('bar'), fill=document.getElementById('barFill');
+let selected=null, isVideo=false, previewUrl=null;
+function showStatus(msg,type=''){statusBox.textContent=msg;statusBox.className='status '+type;statusBox.style.display='block'}
+function formatTime(s){let m=Math.floor(s/60),sec=Math.floor(s%60);return `${m}:${String(sec).padStart(2,'0')}`}
+fileInput.addEventListener('change',()=>{
+ selected=fileInput.files[0];if(!selected)return;
+ if(previewUrl)URL.revokeObjectURL(previewUrl);previewUrl=URL.createObjectURL(selected);
+ isVideo=selected.type.startsWith('video/');wrap.style.display='block';document.getElementById('result').style.display='none';statusBox.style.display='none';
+ if(isVideo){preview.src=previewUrl;preview.style.display='block';img.style.display='none';preview.onloadedmetadata=()=>{
+   if(preview.duration>120.25){showStatus(`Ang video ay ${formatTime(preview.duration)}. Maximum ay 2:00. Mag-trim muna bago i-upload.`, 'error');btn.disabled=true;}
+   else{meta.textContent=`${selected.name} · ${formatTime(preview.duration)} · ${(selected.size/1024/1024).toFixed(1)} MB`;btn.disabled=false;}
+ };}else{preview.pause();preview.style.display='none';img.src=previewUrl;img.style.display='block';meta.textContent=`${selected.name} · Photo · ${(selected.size/1024/1024).toFixed(1)} MB`;btn.disabled=false;}
+});
+document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{cmd.value=cmd.value?cmd.value+', '+b.dataset.cmd:b.dataset.cmd;cmd.focus()}));
+document.getElementById('mic').addEventListener('click',()=>{
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){showStatus('Hindi suportado ng browser ang voice input. I-type muna ang command o subukan ang Chrome.', 'error');return}
+ const rec=new SR();rec.lang='fil-PH';rec.interimResults=false;rec.maxAlternatives=1;
+ showStatus('Nakikinig… sabihin ang editing command.');rec.onresult=e=>{cmd.value+=(cmd.value?' ':'')+e.results[0][0].transcript;showStatus('Nakuha ang voice command.','ok')};rec.onerror=()=>showStatus('Hindi nakuha ang boses. Payagan ang microphone at subukan ulit.','error');rec.start();
+});
+btn.addEventListener('click',async()=>{
+ if(!selected){showStatus('Mag-upload muna ng video o photo.','error');return}
+ if(!cmd.value.trim()){showStatus('I-type o sabihin muna kung anong edit ang gusto mo.','error');return}
+ btn.disabled=true;bar.style.display='block';fill.style.width='15%';showStatus('Inihahanda ang media…');
+ const form=new FormData();form.append('file',selected);form.append('command',cmd.value.trim());if(musicInput.files[0])form.append('music',musicInput.files[0]);
+ let pct=15;const timer=setInterval(()=>{pct=Math.min(pct+4,90);fill.style.width=pct+'%'},900);
+ try{
+  const res=await fetch('/api/edit',{method:'POST',body:form});
+  if(!res.ok){let msg='Hindi natapos ang edit.';try{const d=await res.json();msg=d.detail||msg}catch{}throw new Error(msg)}
+  const blob=await res.blob();const url=URL.createObjectURL(blob);fill.style.width='100%';
+  const out=document.getElementById('result');out.style.display='block';const resultPreview=document.getElementById('resultPreview');resultPreview.innerHTML='';
+  const outputType=blob.type|| (isVideo?'video/mp4':'image/png');
+  if(outputType.startsWith('video/')){const v=document.createElement('video');v.controls=true;v.playsInline=true;v.src=url;v.style.maxWidth='100%';resultPreview.appendChild(v);document.getElementById('download').download='ai-magic-edited.mp4'}
+  else{const im=document.createElement('img');im.src=url;im.alt='Edited photo';resultPreview.appendChild(im);document.getElementById('download').download='ai-magic-edited.png'}
+  const a=document.getElementById('download');a.href=url;showStatus('Tapos na ang processing. I-preview at i-download ang resulta. Paalala: green-screen removal lang ang background key; hindi ito full AI cutout.','ok');out.scrollIntoView({behavior:'smooth',block:'start'});
+ }catch(e){showStatus(e.message||'May error. Subukan ulit.','error')}
+ finally{clearInterval(timer);setTimeout(()=>{bar.style.display='none';fill.style.width='0'},700);btn.disabled=false}
+});
+fetch('/api/health').then(r=>r.json()).then(d=>{if(!d.ffmpeg)showStatus('Demo interface ready, pero hindi pa naka-install ang FFmpeg sa server. I-install ito para gumana ang video export.','error')}).catch(()=>{});
+</script></body></html>
